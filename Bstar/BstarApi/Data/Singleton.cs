@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BstarApi.Models;
+using BstarApi.Data;
 namespace BstarApi.Data
 {
     public class Singleton

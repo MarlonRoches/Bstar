@@ -10,11 +10,11 @@ namespace BstarApi.Models
     {
 
 
-        int id { get; set; }
-        int Padre { get; set; }
-        int[] Hijos { get; set; }
-        Bebida[] Datos { get; set; }
-        bool esHoja { get; set; }
+        public int id { get; set; }
+        public int Padre { get; set; }
+        public int[] Hijos { get; set; }
+        public Bebida[] Datos { get; set; }
+        public bool esHoja { get; set; }
 
         public NodoStar(int _grado, bool Tipo)
         {
@@ -37,17 +37,17 @@ namespace BstarApi.Models
         public string WriteNodo()
         {
             var devolver = string.Empty;
-            devolver += $"{id.ToString().PadLeft(5)}|";
-            devolver += $"{Padre.ToString().PadLeft(5)}|";
+            devolver += $"{id.ToString().PadLeft(5, '0')}|";
+            devolver += $"{Padre.ToString().PadLeft(5, '0')}|";
             for (int i = 0; i < Hijos.Length; i++)
             {
-                devolver += $"{Hijos[i].ToString().PadLeft(10)}|";
+                devolver += $"{Hijos[i].ToString().PadLeft(10, '0')}|";
 
             }
 
             for (int i = 0; i < Datos.Length; i++)
             {
-                devolver += $"{JsonConvert.SerializeObject(Datos[i]).PadLeft(10)}|";
+                devolver += $"{JsonConvert.SerializeObject(Datos[i]).PadLeft(10,'0')}|";
 
             }
             return devolver;
