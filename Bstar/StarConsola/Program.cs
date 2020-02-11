@@ -11,6 +11,8 @@ namespace StarConsola
     {
         static void Main(string[] args)
         {
+            var metodosArbol = new ArbolStar();
+
             var Cocacola = new Bebida
             {
                 Nombre ="Coca",
@@ -19,14 +21,7 @@ namespace StarConsola
                 Sabor= "Cola",
                 Volumen = 2
             };
-            var nodo = new NodoStar(7, true);
-            nodo.Padre = 2;
-            nodo.id = 6;
-            
-            nodo.Datos[0] = Cocacola;
-            nodo.Datos[nodo.Datos.Length-1] = Cocacola;
-            var importe = nodo.WriteNodo();
-            var devuelto = nodo.ReadNodo(importe);
+            metodosArbol.Insertar(Cocacola);
         }
     }
 }

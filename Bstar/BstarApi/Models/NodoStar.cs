@@ -9,7 +9,6 @@ namespace BstarApi.Models
 {
     public class NodoStar
     {
-
         public int Grado { get;set;}
         public int id { get; set; }
         public int Padre { get; set; }
@@ -27,15 +26,14 @@ namespace BstarApi.Models
             }
             else
             { // es la raix
+
                 var grado = Convert.ToInt32(1.33333 * (double)(_grado-1));
                 Datos = new Bebida[grado];
                 Hijos = new int[grado + 1];
                 esHoja = Tipo;
-
             }
 
         }
-
         public string WriteNodo()
         {
             var devolver = string.Empty;
