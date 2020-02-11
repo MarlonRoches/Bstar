@@ -18,7 +18,7 @@ namespace BstarApi.Data
                 return _instance;
             }
         }
-        NodoStar Raiz = new NodoStar(7, false);
+        public NodoStar Raiz = new NodoStar(7, false);
 
 
 

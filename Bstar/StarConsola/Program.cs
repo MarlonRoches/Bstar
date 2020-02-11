@@ -24,6 +24,7 @@ namespace StarConsola
             nodo.id = 1;
             nodo.Datos[0] = Cocacola;
             var importe = nodo.WriteNodo();
+
         }
     }
 }
