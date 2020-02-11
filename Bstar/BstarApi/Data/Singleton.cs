@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using BstarApi.Models;
+using BstarApi.Data;
 namespace BstarApi.Data
 {
     public class Singleton
@@ -17,7 +18,8 @@ namespace BstarApi.Data
                 return _instance;
             }
         }
-        NodoStar Raiz = new NodoStar(7, false);
+        public static int Grado = 7; 
+        public NodoStar Raiz = new NodoStar(7, false);
 
 
 

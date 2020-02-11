@@ -12,5 +12,10 @@ namespace BstarApi.Models
         {
 
         }
+
+        public void Navegar()
+        {
+
+        }
     }
 }
