@@ -18,6 +18,7 @@ namespace BstarApi.Data
                 return _instance;
             }
         }
+        public static int Grado = 7; 
         public NodoStar Raiz = new NodoStar(7, false);
 
 

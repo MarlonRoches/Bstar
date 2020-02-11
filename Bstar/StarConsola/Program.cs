@@ -19,12 +19,14 @@ namespace StarConsola
                 Sabor= "Cola",
                 Volumen = 2
             };
-            var nodo = new NodoStar(7, false);
-            nodo.Padre = 0;
-            nodo.id = 1;
+            var nodo = new NodoStar(7, true);
+            nodo.Padre = 2;
+            nodo.id = 6;
+            
             nodo.Datos[0] = Cocacola;
+            nodo.Datos[nodo.Datos.Length-1] = Cocacola;
             var importe = nodo.WriteNodo();
-
+            var devuelto = nodo.ReadNodo(importe);
         }
     }
 }

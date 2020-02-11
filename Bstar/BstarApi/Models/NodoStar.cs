@@ -27,8 +27,9 @@ namespace BstarApi.Models
             }
             else
             { // es la raix
-                Datos = new Bebida[(4 / 3) * _grado - 1];
-                Hijos = new int[((4 / 3) * _grado - 1) + 1];
+                var grado = Convert.ToInt32(1.33333 * (double)(_grado-1));
+                Datos = new Bebida[grado];
+                Hijos = new int[grado + 1];
                 esHoja = Tipo;
 
             }
@@ -55,11 +56,36 @@ namespace BstarApi.Models
         }
         public NodoStar ReadNodo(string json)
         {
+            //es sensible al tipo de json que le envie
+            var devolver = new NodoStar(7, false);
             var splited = json.Split('|');
-            var devolver = new NodoStar(Singleton.Instance.Raiz.Grado,false);
+            //padre o no
+            if (int.Parse(splited[1]) == 0)
+            { // es raiz
+            devolver = new NodoStar(7,false);
+            }
+            else
+            {//es hoja
+            devolver = new NodoStar(7,true);
+            }
+            //poner id
             devolver.id = int.Parse(splited[0]);
-
-            return null;
+            
+                //poner Datos
+                var contador = 2;
+                for (int i = 0; i < devolver.Hijos.Length; i++)
+                {
+                    devolver.Hijos[i] = int.Parse(splited[contador]);
+                    contador++;
+                }
+                //poner hijos
+                for (int i = 0; i < devolver.Datos.Length; i++)
+                {
+                    var des = splited[contador].Replace("0", "");
+                    devolver.Datos[i] = JsonConvert.DeserializeObject<Bebida>(des);
+                    contador++;
+                }
+            return devolver;
         }
     }
 }
