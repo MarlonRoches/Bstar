@@ -11,32 +11,36 @@ namespace BstarApi.Models
         static string path { get; set; }
         public int LargoPadre  { get; set; }
         public int LargoHijo   { get; set; }
-        public int idActual    { get; set; }
+        public int IdPAdre    { get; set; }
         public int Siguiente    { get; set; }
         public static int Grado{ get; set; }
         public static NodoStar Raiz { get; set; }
-
+        //idpadre|grado|siguiente|tamañopadre|tamañohijo
 
         public ArbolStar(int _grado, string _path)
         {
            
             var file = new FileStream(_path, FileMode.OpenOrCreate);
-            var lector = new StreamReader(file).ReadLine();
+            var lector = new StreamReader(file);
+            var linea = lector.ReadLine();
                 path = _path;
-            if (lector==null)
+            if (linea==null)
             {//nuevo arbol
                 LargoPadre = new NodoStar(_grado, false).WriteNodo().Length;
                 LargoHijo = new NodoStar(_grado, true).WriteNodo().Length;
-                idActual = 1;
-                Siguiente = idActual + 1;
+                IdPAdre = 1;
+                Siguiente = IdPAdre + 1;
                 Grado = _grado;
                 Raiz = new NodoStar(Grado, false);
+                lector.Close();
+                var escritor = new StreamWriter(path);
+                escritor.WriteLine($"{IdPAdre}|{Grado}|{Siguiente}|{LargoPadre}|{LargoHijo}");
             }
             else
             {//arbol cargado
-                var aMetaData = lector.Split('|');
+                var aMetaData = linea.Split('|');
                 //0raiz    
-                idActual = int.Parse(aMetaData[0]);
+                IdPAdre = int.Parse(aMetaData[0]);
                 //1grado
                 Grado = int.Parse(aMetaData[1]);
                 //2siguiente
@@ -58,8 +62,8 @@ namespace BstarApi.Models
                 //escribir MetaData
 
                 //nuevo arbol
-                Raiz.id = idActual;
-                idActual++;
+                Raiz.id = IdPAdre;
+                IdPAdre++;
 
             }
             else
