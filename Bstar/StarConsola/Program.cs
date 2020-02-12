@@ -13,7 +13,8 @@ namespace StarConsola
     {
         static void Main(string[] args)
         {
-            var metodosArbol = new ArbolStar(7, Directory.GetCurrentDirectory());
+
+            var metodosArbol = new ArbolStar(7, $"{Directory.GetCurrentDirectory()}\\Arbol.txt");
 
             var Cocacola = new Bebida
             {

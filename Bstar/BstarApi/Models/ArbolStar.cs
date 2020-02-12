@@ -12,20 +12,45 @@ namespace BstarApi.Models
         public int LargoPadre  { get; set; }
         public int LargoHijo   { get; set; }
         public int idActual    { get; set; }
+        public int Siguiente    { get; set; }
         public static int Grado{ get; set; }
         public static NodoStar Raiz { get; set; }
 
 
-        public ArbolStar(int _grado, string _path, int idActual)
+        public ArbolStar(int _grado, string _path)
         {
-            path = _path;
-            LargoPadre = new NodoStar(_grado, false).WriteNodo().Length;
-            LargoHijo = new NodoStar(_grado, true).WriteNodo().Length;
-            Grado = _grado;
+           
+            var file = new FileStream(_path, FileMode.OpenOrCreate);
+            var lector = new StreamReader(file).ReadLine();
+                path = _path;
+            if (lector==null)
+            {//nuevo arbol
+                LargoPadre = new NodoStar(_grado, false).WriteNodo().Length;
+                LargoHijo = new NodoStar(_grado, true).WriteNodo().Length;
+                idActual = 1;
+                Siguiente = idActual + 1;
+                Grado = _grado;
+                Raiz = new NodoStar(Grado, false);
+            }
+            else
+            {//arbol cargado
+                var aMetaData = lector.Split('|');
+                //0raiz    
+                idActual = int.Parse(aMetaData[0]);
+                //1grado
+                Grado = int.Parse(aMetaData[1]);
+                //2siguiente
+                Siguiente = int.Parse(aMetaData[2]);
+                //3largo padre
+                LargoPadre = int.Parse(aMetaData[3]);
+                //4largohijo
+                LargoHijo = int.Parse(aMetaData[4]);
+                
+            }
         }
         public void Insertar( Bebida Nuevo)
         {
-            var File = new FileStream($"{path}\\Arbol.txt", FileMode.OpenOrCreate);
+            var File = new FileStream(path,FileMode.Open);
             var lector = new StreamReader(File);
             var lol = lector.ReadLine();
             if (lol == null)
