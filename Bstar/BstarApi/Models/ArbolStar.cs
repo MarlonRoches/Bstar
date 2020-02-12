@@ -8,11 +8,21 @@ namespace BstarApi.Models
 {
     public class ArbolStar
     {
-        static string path = Directory.GetCurrentDirectory();
-        public int LargoPadre = 0;
-        public int LargoHijo = 0;
-        public int idActual = 1;
-        public static NodoStar Raiz = new NodoStar(7, false);
+        static string path { get; set; }
+        public int LargoPadre  { get; set; }
+        public int LargoHijo   { get; set; }
+        public int idActual    { get; set; }
+        public static int Grado{ get; set; }
+        public static NodoStar Raiz { get; set; }
+
+
+        public ArbolStar(int _grado, string _path, int idActual)
+        {
+            path = _path;
+            LargoPadre = new NodoStar(_grado, false).WriteNodo().Length;
+            LargoHijo = new NodoStar(_grado, true).WriteNodo().Length;
+            Grado = _grado;
+        }
         public void Insertar( Bebida Nuevo)
         {
             var File = new FileStream($"{path}\\Arbol.txt", FileMode.OpenOrCreate);
@@ -20,10 +30,12 @@ namespace BstarApi.Models
             var lol = lector.ReadLine();
             if (lol == null)
             {
-                //nuevo arbol
                 //escribir MetaData
+
+                //nuevo arbol
                 Raiz.id = idActual;
                 idActual++;
+
             }
             else
             {

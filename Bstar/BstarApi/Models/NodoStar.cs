@@ -44,7 +44,6 @@ namespace BstarApi.Models
                 devolver += $"{Hijos[i].ToString().PadLeft(5, '0')}|";
 
             }
-
             for (int i = 0; i < Datos.Length; i++)
             {
                 devolver += $"{JsonConvert.SerializeObject(Datos[i]).PadLeft(100,'0')}|";
