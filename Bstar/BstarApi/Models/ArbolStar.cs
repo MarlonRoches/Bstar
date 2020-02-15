@@ -63,7 +63,7 @@ namespace BstarApi.Models
         {
             var FILE = new FileStream(path,FileMode.Open);
             var lector = new StreamReader(FILE);
-            if (IdPAdre ==1)
+            if (IdPAdre ==1) // aun no se parte
             {
                 var linea = lector.ReadLine().Remove(0,20);
 
@@ -75,6 +75,7 @@ namespace BstarApi.Models
                     if (item == null)
                     {
                         Raiz.Datos[contador] = Nuevo;
+                    SortDatos(Raiz.Datos);
                         FILE.Close();
 
                         var escritor = new StreamWriter(path);
@@ -89,7 +90,6 @@ namespace BstarApi.Models
                     {
                         contador++;
                     }
-
                 }
             }
         }
@@ -125,6 +125,24 @@ namespace BstarApi.Models
 
         }
 
+        public void SortDatos(Bebida[] A_Arreglar)
+        {
+            var lista = new List<Bebida>();
+            foreach (var item in A_Arreglar)
+            {
+                if (item != null)
+                {
+                    lista.Add(item);
+                }
+            }
+            lista = lista.OrderBy(o => o.Nombre).ToList();
+            var contador = 0;
+            foreach (var item in lista)
+            {
+                A_Arreglar[contador] = item;
+                contador++;
+            }
+        }
         public void Navegar()
         {
 
