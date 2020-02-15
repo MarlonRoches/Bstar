@@ -69,13 +69,19 @@ namespace BstarApi.Models
 
                Raiz =  Raiz.ReadNodo(linea);
                 var contador = 0;
-                foreach (var item in Raiz.Datos)
+                for (int i = 0; i <= Raiz.Datos.Length; i++)
                 {
+                    if (i == Raiz.Datos.Length)
+                    {
+
+
+                        break;
+                    }
                     //insertando en la raiz
-                    if (item == null)
+                    if (Raiz.Datos[i] == null)
                     {
                         Raiz.Datos[contador] = Nuevo;
-                    SortDatos(Raiz.Datos);
+                        SortDatos(Raiz.Datos);
                         FILE.Close();
 
                         var escritor = new StreamWriter(path);
@@ -124,7 +130,6 @@ namespace BstarApi.Models
             return iActualndice;
 
         }
-
         public void SortDatos(Bebida[] A_Arreglar)
         {
             var lista = new List<Bebida>();
@@ -147,6 +152,14 @@ namespace BstarApi.Models
         {
 
         }
-       
+       public void PrimeraParticion(NodoStar Actual, Bebida Nuevo)
+       {
+            var lista = new List<Bebida>();
+            foreach (var item in Actual.Datos)
+            {
+                lista.Add(item);
+
+            }
+       }
     }
 }

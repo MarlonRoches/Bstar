@@ -79,6 +79,15 @@ namespace StarConsola
                 Sabor = "Cola",
                 Casa = "Cocacola Gt",
                 Precio = 5
+            }; 
+            //partir
+            var Minute_Maid = new Bebida
+            {
+                Nombre = "Minute_Maid",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
             };
             #region Por Insertar
 
@@ -93,14 +102,6 @@ namespace StarConsola
             //var Ab = new Bebida
             //{
             //    Nombre = "Ab",
-            //    Volumen = 19,
-            //    Sabor = "Cola",
-            //    Casa = "Cocacola Gt",
-            //    Precio = 5
-            //};
-            //var Minute_Maid = new Bebida
-            //{
-            //    Nombre = "Minute_Maid",
             //    Volumen = 19,
             //    Sabor = "Cola",
             //    Casa = "Cocacola Gt",
@@ -196,14 +197,16 @@ namespace StarConsola
             //};
             #endregion
 
-            metodosArbol.Insertar(Pepsi);
-            metodosArbol.Insertar(Coca);
-            metodosArbol.Insertar(Aqua);
-            metodosArbol.Insertar(SuperCola);
-            metodosArbol.Insertar(Pepper);
-            metodosArbol.Insertar(Gatorade);
-            metodosArbol.Insertar(Zone);
-            metodosArbol.Insertar(Georgia);
+            //metodosArbol.Insertar(Pepsi);
+            //metodosArbol.Insertar(Coca);
+            //metodosArbol.Insertar(Aqua);
+            //metodosArbol.Insertar(SuperCola);
+            //metodosArbol.Insertar(Pepper);
+            //metodosArbol.Insertar(Gatorade);
+            //metodosArbol.Insertar(Zone);
+            //metodosArbol.Insertar(Georgia);
+            //parte
+            metodosArbol.Insertar(Minute_Maid);
         }
     }
 }
