@@ -152,14 +152,15 @@ namespace BstarApi.Models
         {
 
         }
-       public void PrimeraParticion(NodoStar Actual, Bebida Nuevo)
+       public void Separacion(NodoStar Actual, Bebida Nuevo)
        {
             var lista = new List<Bebida>();
             foreach (var item in Actual.Datos)
             {
                 lista.Add(item);
-
             }
+            lista.Add(Nuevo);
+
        }
     }
 }
