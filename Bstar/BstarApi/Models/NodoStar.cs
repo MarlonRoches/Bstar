@@ -9,7 +9,6 @@ namespace BstarApi.Models
 {
     public class NodoStar
     {
-
         public int Grado { get;set;}
         public int id { get; set; }
         public int Padre { get; set; }
@@ -27,15 +26,14 @@ namespace BstarApi.Models
             }
             else
             { // es la raix
+
                 var grado = Convert.ToInt32(1.33333 * (double)(_grado-1));
                 Datos = new Bebida[grado];
                 Hijos = new int[grado + 1];
                 esHoja = Tipo;
-
             }
 
         }
-
         public string WriteNodo()
         {
             var devolver = string.Empty;
@@ -46,7 +44,6 @@ namespace BstarApi.Models
                 devolver += $"{Hijos[i].ToString().PadLeft(5, '0')}|";
 
             }
-
             for (int i = 0; i < Datos.Length; i++)
             {
                 devolver += $"{JsonConvert.SerializeObject(Datos[i]).PadLeft(100,'0')}|";
@@ -54,11 +51,11 @@ namespace BstarApi.Models
             }
             return devolver;
         }
-        public NodoStar ReadNodo(string json)
+        public NodoStar ReadNodo(string NodoSerializado)
         {
             //es sensible al tipo de json que le envie
             var devolver = new NodoStar(7, false);
-            var splited = json.Split('|');
+            var splited = NodoSerializado.Split('|');
             //padre o no
             if (int.Parse(splited[1]) == 0)
             { // es raiz
