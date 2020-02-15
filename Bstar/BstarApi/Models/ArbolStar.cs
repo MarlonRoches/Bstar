@@ -19,7 +19,6 @@ namespace BstarApi.Models
 
         public ArbolStar(int _grado, string _path)
         {
-           
             var file = new FileStream(_path, FileMode.OpenOrCreate);
             var lector = new StreamReader(file);
             var linea = lector.ReadLine();
@@ -34,7 +33,14 @@ namespace BstarApi.Models
                 Raiz = new NodoStar(Grado, false);
                 lector.Close();
                 var escritor = new StreamWriter(path);
-                escritor.WriteLine($"{IdPAdre}|{Grado}|{Siguiente}|{LargoPadre}|{LargoHijo}");
+                Raiz.id = IdPAdre;
+                Raiz.Grado = _grado;
+                Raiz.esHoja = false;
+                escritor.Write($"{(IdPAdre).ToString().PadLeft(3,'0')}" +
+                    $"|{Grado.ToString().PadLeft(3, '0')}|{Siguiente.ToString().PadLeft(3, '0')}" +
+                    $"|{LargoPadre.ToString().PadLeft(3, '0')}|{LargoHijo.ToString().PadLeft(3, '0')}|"+
+                    (Raiz.WriteNodo()));
+                escritor.Close();
             }
             else
             {//arbol cargado
@@ -49,30 +55,44 @@ namespace BstarApi.Models
                 LargoPadre = int.Parse(aMetaData[3]);
                 //4largohijo
                 LargoHijo = int.Parse(aMetaData[4]);
-                
+                Raiz = new NodoStar(_grado, false);
             }
+            file.Close();
         }
         public void Insertar( Bebida Nuevo)
         {
-            var File = new FileStream(path,FileMode.Open);
-            var lector = new StreamReader(File);
-            var lol = lector.ReadLine();
-            if (lol == null)
+            var FILE = new FileStream(path,FileMode.Open);
+            var lector = new StreamReader(FILE);
+            if (IdPAdre ==1)
             {
-                //escribir MetaData
+                var linea = lector.ReadLine().Remove(0,20);
 
-                //nuevo arbol
-                Raiz.id = IdPAdre;
-                IdPAdre++;
+               Raiz =  Raiz.ReadNodo(linea);
+                var contador = 0;
+                foreach (var item in Raiz.Datos)
+                {
+                    //insertando en la raiz
+                    if (item == null)
+                    {
+                        Raiz.Datos[contador] = Nuevo;
+                        FILE.Close();
 
-            }
-            else
-            {
-                //Ya tiene
+                        var escritor = new StreamWriter(path);
+                        escritor.Write($"{(IdPAdre).ToString().PadLeft(3, '0')}" +
+                    $"|{Grado.ToString().PadLeft(3, '0')}|{Siguiente.ToString().PadLeft(3, '0')}" +
+                    $"|{LargoPadre.ToString().PadLeft(3, '0')}|{LargoHijo.ToString().PadLeft(3, '0')}|" +
+                    (Raiz.WriteNodo()));
+                        escritor.Close();
+                        break;
+                    }
+                    else
+                    {
+                        contador++;
+                    }
 
+                }
             }
         }
-
         public int Indice(NodoStar Actual, Bebida Nuevo)
         {
             var iActualndice = 0;
@@ -109,5 +129,6 @@ namespace BstarApi.Models
         {
 
         }
+       
     }
 }

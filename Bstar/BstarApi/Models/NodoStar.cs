@@ -51,11 +51,11 @@ namespace BstarApi.Models
             }
             return devolver;
         }
-        public NodoStar ReadNodo(string json)
+        public NodoStar ReadNodo(string NodoSerializado)
         {
             //es sensible al tipo de json que le envie
             var devolver = new NodoStar(7, false);
-            var splited = json.Split('|');
+            var splited = NodoSerializado.Split('|');
             //padre o no
             if (int.Parse(splited[1]) == 0)
             { // es raiz

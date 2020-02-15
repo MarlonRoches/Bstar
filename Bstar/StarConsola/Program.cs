@@ -18,11 +18,11 @@ namespace StarConsola
 
             var Cocacola = new Bebida
             {
-                Nombre ="Coca",
-                Casa = "Cocacola Gt",
-                Precio = 5,
-                Sabor= "Cola",
-                Volumen = 2
+                Nombre = "Pepsi",
+                Casa = "Pepsi Gt",
+                Precio = 16,
+                Sabor = "Uwu",
+                Volumen = 5
             };
 
             metodosArbol.Insertar(Cocacola);
