@@ -197,6 +197,7 @@ namespace StarConsola
             //};
             #endregion
 
+           var obtenida = metodosArbol.SeekPadre();
             metodosArbol.Insertar(Pepsi);
             metodosArbol.Insertar(Coca);
             metodosArbol.Insertar(Aqua);
