@@ -89,15 +89,23 @@ namespace StarConsola
                 Casa = "Cocacola Gt",
                 Precio = 5
             };
-            var Aa = new Bebida
-            {
-                Nombre = "Aa",
-                Volumen = 19,
-                Sabor = "Cola",
-                Casa = "Cocacola Gt",
-                Precio = 5
-            };
+           var Sake = new Bebida
+           {
+               Nombre = "Sake",
+               Volumen = 19,
+               Sabor = "Cola",
+               Casa = "Cocacola Gt",
+               Precio = 5
+           };
             #region Por Insertar
+            //var Aa = new Bebida
+            //{
+            //    Nombre = "Aa",
+            //    Volumen = 19,
+            //    Sabor = "Cola",
+            //    Casa = "Cocacola Gt",
+            //    Precio = 5
+            //};
 
             //var Ab = new Bebida
             //{
@@ -187,28 +195,19 @@ namespace StarConsola
             //    Casa = "Cocacola Gt",
             //    Precio = 5
             //};
-            //var Sake = new Bebida
-            //{
-            //    Nombre = "Sake",
-            //    Volumen = 19,
-            //    Sabor = "Cola",
-            //    Casa = "Cocacola Gt",
-            //    Precio = 5
-            //};
             #endregion
-
-           var obtenida = metodosArbol.SeekPadre();
-            metodosArbol.Insertar(Pepsi);
-            metodosArbol.Insertar(Coca);
-            metodosArbol.Insertar(Aqua);
-            metodosArbol.Insertar(SuperCola);
-            metodosArbol.Insertar(Pepper);
-            metodosArbol.Insertar(Gatorade);
-            metodosArbol.Insertar(Zone);
-            metodosArbol.Insertar(Georgia);
+            
+            //metodosArbol.Insertar(Pepsi);
+            //metodosArbol.Insertar(Coca);
+            //metodosArbol.Insertar(Aqua);
+            //metodosArbol.Insertar(SuperCola);
+            //metodosArbol.Insertar(Pepper);
+            //metodosArbol.Insertar(Gatorade);
+            //metodosArbol.Insertar(Zone);
+            //metodosArbol.Insertar(Georgia);
             //parte
-            metodosArbol.Insertar(Minute_Maid);
-            metodosArbol.Insertar(Aa);
+            //metodosArbol.Insertar(Minute_Maid);
+            metodosArbol.Insertar(Sake);
         }
     }
 }

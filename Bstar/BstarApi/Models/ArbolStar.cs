@@ -60,15 +60,17 @@ namespace BstarApi.Models
             }
             file.Close();
         }
+
+
         public void Insertar( Bebida Nuevo)
         {
             var FILE = new FileStream(GlobalPath,FileMode.Open);
             var lector = new StreamReader(FILE);
+                FILE.Close();
             if (IdPAdre ==1 && !primeraSeparecion) // aun no se parte
             {
                 var linea = lector.ReadLine();
                 linea = lector.ReadLine();
-                FILE.Close();
                Raiz =  Raiz.ReadNodo(linea);
                 var contador = 0;
                 for (int i = 0; i <= Raiz.Datos.Length; i++)
@@ -101,9 +103,12 @@ namespace BstarApi.Models
             }
             else
             {
+                InsertarEnHoja(SeekPadre(), Nuevo);
 
             }
         }
+
+
         public int Indice(NodoStar Actual, Bebida Nuevo)
         {
             var iActualndice = 0;
@@ -227,6 +232,30 @@ namespace BstarApi.Models
                 linea = reader.ReadLine();
             }
             return new NodoStar(Grado,false).ReadNodo(linea) ;
+        }
+        public NodoStar Hijo()
+        {
+            var file = new FileStream(GlobalPath, FileMode.Open);
+            var reader = new StreamReader(file);
+            var linea = string.Empty;
+            for (int i = 0; i <= IdPAdre; i++)
+            {
+                linea = reader.ReadLine();
+            }
+            return new NodoStar(Grado, true).ReadNodo(linea);
+        }
+
+        public void InsertarEnHoja(NodoStar actual, Bebida Nuevo)
+        {
+            var index = Indice(actual, Nuevo);
+            if (actual.Hijos[index]!= 0)
+            {
+
+            }
+            else
+            {
+
+            }
         }
     }
 }
