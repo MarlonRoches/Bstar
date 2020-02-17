@@ -23,17 +23,19 @@ namespace BstarApi.Models
                 Datos = new Bebida[_grado - 1];
                 Hijos = new int[_grado];
                 esHoja = Tipo;
+                Grado = _grado;
             }
             else
             { // es la raix
-
-                var grado = Convert.ToInt32(1.33333 * (double)(_grado-1));
-                Datos = new Bebida[grado];
-                Hijos = new int[grado + 1];
+                Grado = _grado;
+                var GradRaiz = Convert.ToInt32(1.33333 * (double)(_grado-1));
+                Datos = new Bebida[GradRaiz];
+                Hijos = new int[GradRaiz + 1];
                 esHoja = Tipo;
             }
 
         }
+
         public string WriteNodo()
         {
             var devolver = string.Empty;
@@ -41,12 +43,12 @@ namespace BstarApi.Models
             devolver += $"{Padre.ToString().PadLeft(3, '0')}|";
             for (int i = 0; i < Hijos.Length; i++)
             {
-                devolver += $"{Hijos[i].ToString().PadLeft(5, '0')}|";
+                devolver += $"{Hijos[i].ToString()}|";
 
             }
             for (int i = 0; i < Datos.Length; i++)
             {
-                devolver += $"{JsonConvert.SerializeObject(Datos[i]).PadLeft(100,'0')}|";
+                devolver += $"{JsonConvert.SerializeObject(Datos[i])}|";
 
             }
             return devolver;
@@ -78,7 +80,7 @@ namespace BstarApi.Models
                 //poner hijos
                 for (int i = 0; i < devolver.Datos.Length; i++)
                 {
-                    var des = splited[contador].Replace("0", "");
+                    var des = splited[contador];
                     devolver.Datos[i] = JsonConvert.DeserializeObject<Bebida>(des);
                     contador++;
                 }

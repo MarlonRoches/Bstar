@@ -8,6 +8,7 @@ namespace BstarApi.Models
 {
     public class ArbolStar
     {
+        static bool primeraSeparecion = false;
         static string path { get; set; }
         public int LargoPadre  { get; set; }
         public int LargoHijo   { get; set; }
@@ -36,10 +37,10 @@ namespace BstarApi.Models
                 Raiz.id = IdPAdre;
                 Raiz.Grado = _grado;
                 Raiz.esHoja = false;
-                escritor.Write($"{(IdPAdre).ToString().PadLeft(3,'0')}" +
+                escritor.WriteLine($"{(IdPAdre).ToString().PadLeft(3,'0')}" +
                     $"|{Grado.ToString().PadLeft(3, '0')}|{Siguiente.ToString().PadLeft(3, '0')}" +
-                    $"|{LargoPadre.ToString().PadLeft(3, '0')}|{LargoHijo.ToString().PadLeft(3, '0')}|"+
-                    (Raiz.WriteNodo()));
+                    $"|{LargoPadre.ToString().PadLeft(3, '0')}|{LargoHijo.ToString().PadLeft(3, '0')}|");
+                escritor.WriteLine(Raiz.WriteNodo());
                 escritor.Close();
             }
             else
@@ -63,10 +64,11 @@ namespace BstarApi.Models
         {
             var FILE = new FileStream(path,FileMode.Open);
             var lector = new StreamReader(FILE);
-            if (IdPAdre ==1) // aun no se parte
+            if (IdPAdre ==1 && !primeraSeparecion) // aun no se parte
             {
-                var linea = lector.ReadLine().Remove(0,20);
-
+                var linea = lector.ReadLine();
+                linea = lector.ReadLine();
+                FILE.Close();
                Raiz =  Raiz.ReadNodo(linea);
                 var contador = 0;
                 for (int i = 0; i <= Raiz.Datos.Length; i++)
@@ -74,7 +76,7 @@ namespace BstarApi.Models
                     if (i == Raiz.Datos.Length)
                     {
 
-
+                        PrimeraSeparacion(Raiz, Nuevo);
                         break;
                     }
                     //insertando en la raiz
@@ -82,13 +84,12 @@ namespace BstarApi.Models
                     {
                         Raiz.Datos[contador] = Nuevo;
                         SortDatos(Raiz.Datos);
-                        FILE.Close();
 
                         var escritor = new StreamWriter(path);
-                        escritor.Write($"{(IdPAdre).ToString().PadLeft(3, '0')}" +
-                    $"|{Grado.ToString().PadLeft(3, '0')}|{Siguiente.ToString().PadLeft(3, '0')}" +
-                    $"|{LargoPadre.ToString().PadLeft(3, '0')}|{LargoHijo.ToString().PadLeft(3, '0')}|" +
-                    (Raiz.WriteNodo()));
+                        escritor.WriteLine($"{(IdPAdre).ToString().PadLeft(3, '0')}" +
+                         $"|{Grado.ToString().PadLeft(3, '0')}|{Siguiente.ToString().PadLeft(3, '0')}" +
+                         $"|{LargoPadre.ToString().PadLeft(3, '0')}|{LargoHijo.ToString().PadLeft(3, '0')}");
+                        escritor.WriteLine(Raiz.WriteNodo());
                         escritor.Close();
                         break;
                     }
@@ -97,6 +98,10 @@ namespace BstarApi.Models
                         contador++;
                     }
                 }
+            }
+            else
+            {
+
             }
         }
         public int Indice(NodoStar Actual, Bebida Nuevo)
@@ -152,7 +157,7 @@ namespace BstarApi.Models
         {
 
         }
-       public void Separacion(NodoStar Actual, Bebida Nuevo)
+       public void PrimeraSeparacion(NodoStar Actual, Bebida Nuevo)
        {
             var lista = new List<Bebida>();
             foreach (var item in Actual.Datos)
@@ -161,6 +166,60 @@ namespace BstarApi.Models
             }
             lista.Add(Nuevo);
 
-       }
+            // escribir en el archivo todos los nodos disponibles del padre e hijos
+            var hijo1 = new NodoStar(Grado, true)
+            {
+                Grado = Grado
+            };
+            hijo1.id = IdPAdre;
+            var indice =0;
+
+            for (int i = 0; i < lista.Count / 2; i++)
+            {
+                hijo1.Datos[indice] =lista[i];
+                indice++;
+            }
+
+
+            indice =0;
+            var hijo2 = new NodoStar(Grado, true);
+
+            hijo2.id = Siguiente;
+            Siguiente++;
+            for (int i = (lista.Count / 2) +1; i < lista.Count; i++)
+            {
+                hijo2.Datos[indice] = lista[i];
+                indice++;
+            }
+            var raiznueva = new NodoStar(Grado, false)
+            {
+                id = Siguiente
+            };
+            raiznueva.Datos[0] = lista[lista.Count / 2];
+            IdPAdre = Siguiente;
+            raiznueva.Hijos[0] = hijo1.id;
+            raiznueva.Hijos[1] = hijo2.id;
+            hijo1.Padre = raiznueva.id;
+            hijo2.Padre = raiznueva.id;
+            Siguiente++;
+
+
+            var escritor = new StreamWriter(path);
+            //metadata
+            escritor.WriteLine($"{(IdPAdre).ToString().PadLeft(3, '0')}" +
+            $"|{Grado.ToString().PadLeft(3, '0')}|{Siguiente.ToString().PadLeft(3, '0')}" +
+            $"|{LargoPadre.ToString().PadLeft(3, '0')}|{LargoHijo.ToString().PadLeft(3, '0')}|");
+            // nodos
+            escritor.WriteLine(hijo1.WriteNodo());
+            escritor.WriteLine(hijo2.WriteNodo());
+            escritor.WriteLine(raiznueva.WriteNodo());
+            escritor.Close();
+
+
+        }
+        public int SeekPadre()
+        {
+            return 0;
+        }
     }
 }
