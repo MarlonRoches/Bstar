@@ -197,16 +197,16 @@ namespace StarConsola
             //};
             #endregion
             
-            //metodosArbol.Insertar(Pepsi);
-            //metodosArbol.Insertar(Coca);
-            //metodosArbol.Insertar(Aqua);
-            //metodosArbol.Insertar(SuperCola);
-            //metodosArbol.Insertar(Pepper);
-            //metodosArbol.Insertar(Gatorade);
-            //metodosArbol.Insertar(Zone);
-            //metodosArbol.Insertar(Georgia);
-            //parte
-            //metodosArbol.Insertar(Minute_Maid);
+            metodosArbol.Insertar(Pepsi);
+            metodosArbol.Insertar(Coca);
+            metodosArbol.Insertar(Aqua);
+            metodosArbol.Insertar(SuperCola);
+            metodosArbol.Insertar(Pepper);
+            metodosArbol.Insertar(Gatorade);
+            metodosArbol.Insertar(Zone);
+            metodosArbol.Insertar(Georgia);
+           // ////parte
+           metodosArbol.Insertar(Minute_Maid);
             metodosArbol.Insertar(Sake);
         }
     }
