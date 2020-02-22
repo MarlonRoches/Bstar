@@ -208,6 +208,7 @@ namespace StarConsola
             metodosArbol.Insertar(Pepper);
             metodosArbol.Insertar(Aqua);
             metodosArbol.Insertar(Ab);
+            // prestar a la derecha
         }
     }
 }
