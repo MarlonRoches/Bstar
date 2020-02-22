@@ -105,6 +105,14 @@ namespace StarConsola
                 Casa = "Cocacola Gt",
                 Precio = 5
             };
+            var Code= new Bebida
+            {
+                Nombre = "Code",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
             #region Por Insertar
             //var Aa = new Bebida
             //{
@@ -208,6 +216,7 @@ namespace StarConsola
             metodosArbol.Insertar(Pepper);
             metodosArbol.Insertar(Aqua);
             metodosArbol.Insertar(Ab);
+            metodosArbol.Insertar(Code);
             // prestar a la derecha
         }
     }

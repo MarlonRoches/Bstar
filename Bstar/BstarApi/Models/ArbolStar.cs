@@ -103,7 +103,7 @@ namespace BstarApi.Models
             else
             {
                 FILE.Close();
-                InsertarEnHoja(SeekPadre(), Nuevo);
+                InsertarEnHoja(SeekPadre(IdPAdre), Nuevo);
 
             }
         } 
@@ -198,6 +198,7 @@ namespace BstarApi.Models
             {
                 id = Siguiente
             };
+            lista.Sort((x, y) => x.Nombre.CompareTo(y.Nombre));
             raiznueva.Datos[0] = lista[lista.Count / 2];
             IdPAdre = Siguiente;
             raiznueva.Hijos[0] = hijo1.id;
@@ -205,7 +206,9 @@ namespace BstarApi.Models
             hijo1.Padre = raiznueva.id;
             hijo2.Padre = raiznueva.id;
             Siguiente++;
-
+            SortDatos(raiznueva.Datos);
+            SortDatos(hijo1.Datos);
+            SortDatos(hijo2.Datos);
 
             var escritor = new StreamWriter(GlobalPath);
             //metadata
@@ -220,12 +223,12 @@ namespace BstarApi.Models
 
 
         }
-        public NodoStar SeekPadre()
+        public NodoStar SeekPadre(int id_padre)
         {
             var file = new FileStream(GlobalPath, FileMode.Open);
             var reader = new StreamReader(file);
             var linea = string.Empty;
-            for (int i = 0; i <= IdPAdre; i++)
+            for (int i = 0; i <= id_padre; i++)
             {
                 linea = reader.ReadLine();
             }
@@ -255,9 +258,9 @@ namespace BstarApi.Models
                 {
                     if (EstaLleno(actual))
                     {
-
+                        CompartirDato(actual);
                     }
-                    if (actual.Datos[contador] == null)
+                    else if (actual.Datos[contador] == null)
                     {
                         actual.Datos[contador] = Nuevo;
                         SortDatos(actual.Datos);
@@ -292,14 +295,73 @@ namespace BstarApi.Models
             file.Position= index+1;
             int indicearchivo = Convert.ToInt32(index);
             //sobre escribe el hijo
+            SortDatos(HijoNueo.Datos);
             file.Write(Encoding.ASCII.GetBytes(HijoNueo.WriteNodo()), 0, (HijoNueo.WriteNodo()).Length);
             file.Close();
         }
 
-        public void Prestar(NodoStar Padre, NodoStar[]Hijos)
+        public void CompartirDato(NodoStar Actual)
         {
-            // derecha
+            var padre = SeekPadre(Actual.Padre);
+            var IndicesHijos = new List<int>();
+            var indiceDelHijoACompartir = 0;
+            //llenar lista de hijos disponibles
+            foreach (var indicehijo in padre.Hijos)
+            {
+                if (indicehijo == 0)
+                {
+                    break;
+                }
+                else
+                {
+                    IndicesHijos.Add(indicehijo);
+                }
+            }
+            IndicesHijos.ToArray();
+            // encuentra el indice en el arreglo de hijos
+            foreach (var item in IndicesHijos)
+            {
+                if (item == Actual.id)
+                {
+                    break;
+                }
+                else
+                {
+                    indiceDelHijoACompartir++;
+                }
+            }
             // izquierda
+            var indiceizquierda = indiceDelHijoACompartir- 1;
+            var indiceDerecha = indiceDelHijoACompartir +1;
+            var encontrado = true;
+            while (encontrado)
+            {
+                if (indiceizquierda >= 1)
+                {
+                    var lool = IndicesHijos[indiceDerecha];
+                    if (EstaLleno(SeekHijo(lool)))
+                    {
+
+                    }
+                }
+                else
+                {
+                    indiceizquierda--;
+                }
+                if (indiceDerecha <= IndicesHijos.Count)
+                {
+                    var lool = IndicesHijos[indiceDerecha];
+                    if (EstaLleno(SeekHijo(lool)))
+                    {
+
+                    }
+
+                }
+                else
+                {
+                    indiceDerecha++;
+                }
+            }
         }
 
         public bool EstaLleno(NodoStar Actual)
@@ -312,7 +374,30 @@ namespace BstarApi.Models
                 }
             }
             SortDatos(Actual.Datos);
+
             return true;
+        }
+        public int PuedeRecibir(NodoStar Prestamista)
+        {
+            var datos = new List<Bebida>();
+            for (int i = 0; i < Prestamista.Grado - 1; i++)
+            {
+                if (Prestamista.Datos[i] != null)
+                {
+                    datos.Add(Prestamista.Datos[i]);
+                }
+            }
+            if (datos.Count> ((2 * Grado) - 1) / 3)
+            {
+            return Prestamista.id;
+
+            }
+            else
+            {
+
+            return 99;
+            }
+
         }
     }
 }
