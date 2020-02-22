@@ -21,8 +21,8 @@ namespace StarConsola
                 Nombre = "Coca",
                 Volumen = 19,
                 Sabor = "Cola",
-                Casa= "Cocacola Gt",
-                Precio= 5
+                Casa = "Cocacola Gt",
+                Precio = 5
             };
             var Pepsi = new Bebida
             {
@@ -79,7 +79,7 @@ namespace StarConsola
                 Sabor = "Cola",
                 Casa = "Cocacola Gt",
                 Precio = 5
-            }; 
+            };
             //partir
             var Minute_Maid = new Bebida
             {
@@ -89,27 +89,26 @@ namespace StarConsola
                 Casa = "Cocacola Gt",
                 Precio = 5
             };
-           var Sake = new Bebida
-           {
-               Nombre = "Sake",
-               Volumen = 19,
-               Sabor = "Cola",
-               Casa = "Cocacola Gt",
-               Precio = 5
-           };
+            var Sake = new Bebida
+            {
+                Nombre = "Sake",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+            var Ab = new Bebida
+            {
+                Nombre = "Ab",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
             #region Por Insertar
             //var Aa = new Bebida
             //{
             //    Nombre = "Aa",
-            //    Volumen = 19,
-            //    Sabor = "Cola",
-            //    Casa = "Cocacola Gt",
-            //    Precio = 5
-            //};
-
-            //var Ab = new Bebida
-            //{
-            //    Nombre = "Ab",
             //    Volumen = 19,
             //    Sabor = "Cola",
             //    Casa = "Cocacola Gt",
@@ -196,18 +195,19 @@ namespace StarConsola
             //    Precio = 5
             //};
             #endregion
-            
+
             metodosArbol.Insertar(Pepsi);
             metodosArbol.Insertar(Coca);
-            metodosArbol.Insertar(Aqua);
             metodosArbol.Insertar(SuperCola);
-            metodosArbol.Insertar(Pepper);
+            metodosArbol.Insertar(Sake);
+            metodosArbol.Insertar(Minute_Maid);
             metodosArbol.Insertar(Gatorade);
             metodosArbol.Insertar(Zone);
             metodosArbol.Insertar(Georgia);
-           // ////parte
-           metodosArbol.Insertar(Minute_Maid);
-            metodosArbol.Insertar(Sake);
+            ///parte
+            metodosArbol.Insertar(Pepper);
+            metodosArbol.Insertar(Aqua);
+            metodosArbol.Insertar(Ab);
         }
     }
 }

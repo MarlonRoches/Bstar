@@ -277,6 +277,7 @@ namespace BstarApi.Models
             }
 
 
+
         }
         public void EscribirHijo(int indicehijo, NodoStar HijoNueo)
         {
@@ -291,8 +292,7 @@ namespace BstarApi.Models
             }
             file.Position= index+1;
             int indicearchivo = Convert.ToInt32(index);
-            //file.Write(Encoding.ASCII.GetBytes(HijoNueo.WriteNodo()), 0, HijoNueo.WriteNodo().Length);
-
+            //sobre escribe el hijo
             file.Write(Encoding.ASCII.GetBytes(HijoNueo.WriteNodo()), 0, (HijoNueo.WriteNodo()).Length);
             file.Close();
         }

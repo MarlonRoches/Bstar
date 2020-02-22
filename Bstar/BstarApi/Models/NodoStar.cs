@@ -69,7 +69,7 @@ namespace BstarApi.Models
             }
             //poner id
             devolver.id = int.Parse(splited[0]);
-
+            devolver.Padre = int.Parse(splited[1]);
             //poner Datos
             var contador = 2;
             for (int i = 0; i < devolver.Hijos.Length; i++)
@@ -86,5 +86,8 @@ namespace BstarApi.Models
             }
             return devolver;
         }
+
+
     }
+
 }
