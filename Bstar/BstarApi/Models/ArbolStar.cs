@@ -261,7 +261,7 @@ namespace BstarApi.Models
                         CompartirDato(actual, Nuevo);
                         break;
                     }
-                    else if (actual.Datos[contador] == null)
+                    else if  (actual.Datos[contador] == null)
                     {
                         actual.Datos[contador] = Nuevo;
                         SortDatos(actual.Datos);
@@ -300,6 +300,7 @@ namespace BstarApi.Models
             file.Write(Encoding.ASCII.GetBytes(HijoNueo.WriteNodo()), 0, (HijoNueo.WriteNodo()).Length);
             file.Close();
         }
+
         public void EscribirPadre(int _idPadre, NodoStar PadreNuevo)
         {
             var file = new FileStream(GlobalPath, FileMode.Open);
@@ -355,27 +356,13 @@ namespace BstarApi.Models
             var indiceDerecha = indiceDelHijoACompartir +1;
             var caminoDerecha = new List<int>();
             var caminoIzquierda = new List<int>();
-            var encontrado = false;
-            while (!encontrado)
-            {
+
                 if (indiceizquierda >= 1)
                 {
                     var lool = IndicesHijos[indiceDerecha];
                     if (!EstaLleno(SeekHijo(lool)))
                     {
 
-                    }
-                }
-                else
-                {
-                    indiceizquierda--;
-                    try
-                    {
-
-                    caminoIzquierda.Add(IndicesHijos[indiceizquierda]);
-                    }
-                    catch (Exception)
-                    {
                     }
                 }
 
@@ -387,24 +374,150 @@ namespace BstarApi.Models
                         caminoDerecha.Add(IndicesHijos[indiceDerecha]);
 
                         CompartirHaciaLaDerecha(Actual, caminoDerecha.ToArray(),Nuevo);
-                        encontrado = true;
                     }
                     else
                     {
-                        //añadir a los hijos que quedan en el camino por compartir
+
+                    //Partir Hacia la derecha
+                    PartirHaciaLaDerecha(Actual, SeekHijo(lool), Nuevo);
                     }
 
                 }
-                else
-                {
-                    indiceDerecha++;
-                    caminoDerecha.Add(IndicesHijos[indiceDerecha]);
-
-                }
-            }
+                
+            
         }
 
+        public void PartirHaciaLaDerecha(NodoStar Hijo, NodoStar Hermano, Bebida Nuevo)
+        {
+            var padre = SeekPadre(Hijo.Padre);
+            var NuevoHermano = new NodoStar(Grado, true)
+            {
+                Padre = Hijo.Padre,
+                id = Siguiente
+            };
 
+            Siguiente++;
+            var lista = new List<Bebida>();
+            //llenamos la lista
+            foreach (var item in padre.Datos)
+            {
+                if (item== null)
+                {
+                    break;
+                }
+                else
+                {
+                    lista.Add(item);
+                }
+            }
+            foreach (var item in Hijo.Datos)
+            {
+                if (item == null)
+                {
+                    break;
+                }
+                else
+                {
+                    lista.Add(item);
+                }
+            }
+            foreach (var item in Hermano.Datos)
+            {
+                if (item == null)
+                {
+                    break;
+                }
+                else
+                {
+                    lista.Add(item);
+                }
+            }
+            lista.Add(Nuevo);
+            var array = lista.ToArray();
+            SortDatos(array);
+            lista = array.ToList<Bebida>();
+            var minimo = ((2 * Grado) - 1) / 3;
+            var listaPadre = new List<Bebida>();
+            var listaHijo = new List<Bebida>();
+            var listaHermano = new List<Bebida>();
+            var listaNuevo = new List<Bebida>();
+            for (int i = 0; i < minimo; i++)
+            {
+                listaHijo.Add(lista[0]);
+                lista.Remove(lista[0]);
+            }
+            listaPadre.Add(lista[0]);
+            lista.Remove(lista[0]);
+            for (int i = 0; i < minimo; i++)
+            {
+                listaHermano.Add(lista[0]);
+                lista.Remove(lista[0]);
+            }
+            listaPadre.Add(lista[0]);
+            lista.Remove(lista[0]);
+            for (int i = 0; i < minimo; i++)
+            {
+                listaNuevo.Add(lista[0]);
+                lista.Remove(lista[0]);
+            }
+            for (int i = 0; i < Hijo.Datos.Length; i++)
+            {
+                if (listaHijo.Count!= 0)
+                {
+                    Hijo.Datos[i] = listaHijo[0]; listaHijo.Remove(listaHijo[0]);
+                }
+                else
+                {
+                    Hijo.Datos[i] = null;
+                }
+            }
+            for (int i = 0; i < Hermano.Datos.Length; i++)
+            {
+                if (listaHermano.Count != 0)
+                {
+                    Hermano.Datos[i] = listaHermano[0]; listaHermano.Remove(listaHermano[0]);
+                }
+                else
+                {
+                    Hermano.Datos[i] = null;
+                }
+            }
+            for (int i = 0; i < NuevoHermano.Datos.Length; i++)
+            {
+                if (listaNuevo.Count != 0)
+                {
+                    NuevoHermano.Datos[i] = listaNuevo[0]; listaNuevo.Remove(listaNuevo[0]);
+                }
+                else
+                {
+                    NuevoHermano.Datos[i] = null;
+                }
+            }
+            for (int i = 0; i < padre.Datos.Length; i++)
+            {
+                if (listaPadre.Count != 0)
+                {
+                    padre.Datos[i] = listaPadre[0]; listaPadre.Remove(listaPadre[0]);
+                }
+                else
+                {
+                    padre.Datos[i] = null;
+                }
+            }
+            for (int i = 0; i < padre.Hijos.Length; i++)
+            {
+                if (padre.Hijos[i]==0)
+                {
+                    padre.Hijos[i] = NuevoHermano.id;
+                    break;
+                }
+            }
+            EscribirMetaData();
+            EscribirPadre(padre.id,padre);
+            EscribirHijo(Hijo.id, Hijo);
+            EscribirHijo(Hermano.id,Hermano);
+            EscribirHijo(NuevoHermano.id,NuevoHermano);
+        }
         public void CompartirHaciaLaDerecha(NodoStar Sharing, int[] Camino, Bebida Nuevo)
         {
             var sube = Sharing.Datos[Sharing.Datos.Length - 1];
@@ -436,7 +549,6 @@ namespace BstarApi.Models
                 }
             }
         }
-
         public bool EstaLleno(NodoStar Actual)
         {
             for (int i = 0; i < Actual.Grado - 1; i++)
@@ -471,6 +583,15 @@ namespace BstarApi.Models
             return 99;
             }
 
+        }
+        public void EscribirMetaData()
+        {
+            var meta = $"{(IdPAdre).ToString().PadLeft(3, '0')}" +
+                         $"|{Grado.ToString().PadLeft(3, '0')}|{Siguiente.ToString().PadLeft(3, '0')}" +
+                         $"|{LargoPadre.ToString().PadLeft(3, '0')}|{LargoHijo.ToString().PadLeft(3, '0')}";
+            var escritor = new FileStream(GlobalPath,FileMode.Open);
+            escritor.Write(Encoding.ASCII.GetBytes(meta), 0, (meta).Length);
+            escritor.Close();
         }
     }
 }

@@ -121,6 +121,16 @@ namespace StarConsola
                 Casa = "Cocacola Gt",
                 Precio = 5
             };
+            
+            var Glacéau = new Bebida
+            {
+                Nombre = "Glacéau",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+
             #region Por Insertar
             //var Aa = new Bebida
             //{
@@ -130,14 +140,7 @@ namespace StarConsola
             //    Casa = "Cocacola Gt",
             //    Precio = 5
             //};
-            //var Glacéau = new Bebida
-            //{
-            //    Nombre = "Glacéau",
-            //    Volumen = 19,
-            //    Sabor = "Cola",
-            //    Casa = "Cocacola Gt",
-            //    Precio = 5
-            //};
+
             //var Yoda = new Bebida
             //{
             //    Nombre = "Yoda",
@@ -226,6 +229,7 @@ namespace StarConsola
             metodosArbol.Insertar(Ab);
             metodosArbol.Insertar(Code);
             metodosArbol.Insertar(zhu);
+            metodosArbol.Insertar(Glacéau);
             // prestar a la derecha
         }
     }
