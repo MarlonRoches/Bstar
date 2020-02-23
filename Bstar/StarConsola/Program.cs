@@ -121,7 +121,6 @@ namespace StarConsola
                 Casa = "Cocacola Gt",
                 Precio = 5
             };
-            
             var Glacéau = new Bebida
             {
                 Nombre = "Glacéau",
@@ -131,6 +130,14 @@ namespace StarConsola
                 Precio = 5
             };
 
+            var Quetzalteca = new Bebida
+            {
+                Nombre = "Quetzalteca",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
             #region Por Insertar
             //var Aa = new Bebida
             //{
@@ -230,6 +237,7 @@ namespace StarConsola
             metodosArbol.Insertar(Code);
             metodosArbol.Insertar(zhu);
             metodosArbol.Insertar(Glacéau);
+            metodosArbol.Insertar(Quetzalteca);
             // prestar a la derecha
         }
     }
