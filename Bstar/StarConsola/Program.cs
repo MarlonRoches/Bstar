@@ -21,8 +21,8 @@ namespace StarConsola
                 Nombre = "Coca",
                 Volumen = 19,
                 Sabor = "Cola",
-                Casa= "Cocacola Gt",
-                Precio= 5
+                Casa = "Cocacola Gt",
+                Precio = 5
             };
             var Pepsi = new Bebida
             {
@@ -79,7 +79,7 @@ namespace StarConsola
                 Sabor = "Cola",
                 Casa = "Cocacola Gt",
                 Precio = 5
-            }; 
+            };
             //partir
             var Minute_Maid = new Bebida
             {
@@ -89,8 +89,97 @@ namespace StarConsola
                 Casa = "Cocacola Gt",
                 Precio = 5
             };
-            #region Por Insertar
+            var Sake = new Bebida
+            {
+                Nombre = "Sake",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+            var Ab = new Bebida
+            {
+                Nombre = "Ab",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+            var Code= new Bebida
+            {
+                Nombre = "Code",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+            var zhu = new Bebida
+            {
+                Nombre = "zhu",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+            var Glacéau = new Bebida
+            {
+                Nombre = "Glacéau",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
 
+            var Quetzalteca = new Bebida
+            {
+                Nombre = "Quetzalteca",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+            var H2O = new Bebida
+            {
+                Nombre = "H2O",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+            var Leche = new Bebida
+            {
+                Nombre = "Leche",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+
+            var Fast = new Bebida
+            {
+                Nombre = "Fast",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+            var Nada = new Bebida
+            {
+                Nombre = "Nada",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+            var Yemen = new Bebida
+            {
+                Nombre = "Yemen",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+            #region Por Insertar
             //var Aa = new Bebida
             //{
             //    Nombre = "Aa",
@@ -99,22 +188,7 @@ namespace StarConsola
             //    Casa = "Cocacola Gt",
             //    Precio = 5
             //};
-            //var Ab = new Bebida
-            //{
-            //    Nombre = "Ab",
-            //    Volumen = 19,
-            //    Sabor = "Cola",
-            //    Casa = "Cocacola Gt",
-            //    Precio = 5
-            //};
-            //var Glacéau = new Bebida
-            //{
-            //    Nombre = "Glacéau",
-            //    Volumen = 19,
-            //    Sabor = "Cola",
-            //    Casa = "Cocacola Gt",
-            //    Precio = 5
-            //};
+
             //var Yoda = new Bebida
             //{
             //    Nombre = "Yoda",
@@ -187,26 +261,35 @@ namespace StarConsola
             //    Casa = "Cocacola Gt",
             //    Precio = 5
             //};
-            //var Sake = new Bebida
-            //{
-            //    Nombre = "Sake",
-            //    Volumen = 19,
-            //    Sabor = "Cola",
-            //    Casa = "Cocacola Gt",
-            //    Precio = 5
-            //};
             #endregion
 
-            //metodosArbol.Insertar(Pepsi);
-            //metodosArbol.Insertar(Coca);
-            //metodosArbol.Insertar(Aqua);
-            //metodosArbol.Insertar(SuperCola);
-            //metodosArbol.Insertar(Pepper);
-            //metodosArbol.Insertar(Gatorade);
-            //metodosArbol.Insertar(Zone);
-            //metodosArbol.Insertar(Georgia);
-            //parte
+            metodosArbol.Insertar(Pepsi);
+            metodosArbol.Insertar(Coca);
+            metodosArbol.Insertar(SuperCola);
+            metodosArbol.Insertar(Sake);
             metodosArbol.Insertar(Minute_Maid);
+            metodosArbol.Insertar(Gatorade);
+            metodosArbol.Insertar(Zone);
+            metodosArbol.Insertar(Georgia);
+            ///parte
+            metodosArbol.Insertar(Pepper);
+            metodosArbol.Insertar(Aqua);
+            metodosArbol.Insertar(Ab);
+            //comparte derecha
+            metodosArbol.Insertar(Code);
+            metodosArbol.Insertar(zhu);
+            metodosArbol.Insertar(Glacéau);
+            metodosArbol.Insertar(Quetzalteca);
+            metodosArbol.Insertar(H2O);
+            metodosArbol.Insertar(Leche);
+            metodosArbol.Insertar(Fast); 
+            //comparte izquierda
+            metodosArbol.Insertar(Nada);
+            //comparte derecha
+            metodosArbol.Insertar(Nada);
+            metodosArbol.Insertar(Yemen);
+
+            // prestar a la derecha
         }
     }
 }

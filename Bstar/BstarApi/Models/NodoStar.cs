@@ -23,17 +23,19 @@ namespace BstarApi.Models
                 Datos = new Bebida[_grado - 1];
                 Hijos = new int[_grado];
                 esHoja = Tipo;
+                Grado = _grado;
             }
             else
             { // es la raix
-
-                var grado = Convert.ToInt32(1.33333 * (double)(_grado-1));
-                Datos = new Bebida[grado];
-                Hijos = new int[grado + 1];
+                Grado = _grado;
+                var GradRaiz = Convert.ToInt32(1.33333 * (double)(_grado-1));
+                Datos = new Bebida[GradRaiz];
+                Hijos = new int[GradRaiz + 1];
                 esHoja = Tipo;
             }
 
         }
+
         public string WriteNodo()
         {
             var devolver = string.Empty;
@@ -46,7 +48,7 @@ namespace BstarApi.Models
             }
             for (int i = 0; i < Datos.Length; i++)
             {
-                devolver += $"{JsonConvert.SerializeObject(Datos[i]).PadLeft(100,'0')}|";
+                devolver += $"{JsonConvert.SerializeObject(Datos[i]).PadLeft(100, '0')}|";
 
             }
             return devolver;
@@ -59,30 +61,33 @@ namespace BstarApi.Models
             //padre o no
             if (int.Parse(splited[1]) == 0)
             { // es raiz
-            devolver = new NodoStar(7,false);
+                devolver = new NodoStar(7, false);
             }
             else
             {//es hoja
-            devolver = new NodoStar(7,true);
+                devolver = new NodoStar(7, true);
             }
             //poner id
             devolver.id = int.Parse(splited[0]);
-            
-                //poner Datos
-                var contador = 2;
-                for (int i = 0; i < devolver.Hijos.Length; i++)
-                {
-                    devolver.Hijos[i] = int.Parse(splited[contador]);
-                    contador++;
-                }
-                //poner hijos
-                for (int i = 0; i < devolver.Datos.Length; i++)
-                {
-                    var des = splited[contador].Replace("0", "");
-                    devolver.Datos[i] = JsonConvert.DeserializeObject<Bebida>(des);
-                    contador++;
-                }
+            devolver.Padre = int.Parse(splited[1]);
+            //poner Datos
+            var contador = 2;
+            for (int i = 0; i < devolver.Hijos.Length; i++)
+            {
+                devolver.Hijos[i] = int.Parse(splited[contador]);
+                contador++;
+            }
+            //poner hijos
+            for (int i = 0; i < devolver.Datos.Length; i++)
+            {
+                var des = splited[contador].Replace("0", "");
+                devolver.Datos[i] = JsonConvert.DeserializeObject<Bebida>(des);
+                contador++;
+            }
             return devolver;
         }
+
+
     }
+
 }
