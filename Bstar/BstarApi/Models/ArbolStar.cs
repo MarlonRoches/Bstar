@@ -300,7 +300,6 @@ namespace BstarApi.Models
             file.Write(Encoding.ASCII.GetBytes(HijoNueo.WriteNodo()), 0, (HijoNueo.WriteNodo()).Length);
             file.Close();
         }
-
         public void EscribirPadre(int _idPadre, NodoStar PadreNuevo)
         {
             var file = new FileStream(GlobalPath, FileMode.Open);
@@ -356,17 +355,26 @@ namespace BstarApi.Models
             var indiceDerecha = indiceDelHijoACompartir +1;
             var caminoDerecha = new List<int>();
             var caminoIzquierda = new List<int>();
-
-                if (indiceizquierda >= 1)
+            var intercambiado = true;
+                if (indiceizquierda >= 0 && intercambiado)
                 {
                     var lool = IndicesHijos[indiceDerecha];
                     if (!EstaLleno(SeekHijo(lool)))
                     {
-
+                        caminoIzquierda.Add(IndicesHijos[indiceizquierda]);
+                    
+                        CompartirHaciaLaIzquierda(Actual, caminoIzquierda.ToArray(), Nuevo);
+                    intercambiado = false;
+                }
+                    else
+                    {
+                    
+                        //Partir Hacia la derecha
+                        PartirHaciaLaDerecha(Actual, SeekHijo(lool), Nuevo);
                     }
                 }
 
-                if (indiceDerecha <= IndicesHijos.Count)
+                if (indiceDerecha <= IndicesHijos.Count&& intercambiado)
                 {
                     var lool = IndicesHijos[indiceDerecha];
                     if (!EstaLleno(SeekHijo(lool)))
@@ -549,6 +557,38 @@ namespace BstarApi.Models
                 }
             }
         }
+
+        public void CompartirHaciaLaIzquierda(NodoStar Sharing, int[] IndiceHermano, Bebida Nuevo)
+        {
+
+            var padre = SeekPadre(Sharing.Padre);
+            var HermanoIzquierdo = SeekHijo(IndiceHermano[0]);
+
+            var listaactual = Sharing.Datos.ToList<Bebida>();
+            listaactual.Add(Nuevo);
+            listaactual.Sort((x, y) => x.Nombre.CompareTo(y.Nombre));
+            var datoBaja = padre.Datos[ Indice(padre,Nuevo)-1];
+            var sube = listaactual[0];
+            listaactual.Remove(listaactual[0]);
+            Sharing.Datos = listaactual.ToArray();
+            padre.Datos[Indice(padre, Nuevo) - 1] = sube;
+            for (int i = 0; i < HermanoIzquierdo.Datos.Length; i++)
+            {
+                if (HermanoIzquierdo.Datos[i] == null)
+                {
+                    HermanoIzquierdo.Datos[i] = datoBaja;
+                    break;
+                }
+            }
+            EscribirHijo(Sharing.id,Sharing);
+            EscribirHijo(HermanoIzquierdo.id,HermanoIzquierdo);
+            EscribirPadre(padre.id,padre);
+        }
+
+
+
+
+
         public bool EstaLleno(NodoStar Actual)
         {
             for (int i = 0; i < Actual.Grado - 1; i++)

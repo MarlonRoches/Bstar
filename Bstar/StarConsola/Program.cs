@@ -138,6 +138,47 @@ namespace StarConsola
                 Casa = "Cocacola Gt",
                 Precio = 5
             };
+            var H2O = new Bebida
+            {
+                Nombre = "H2O",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+            var Leche = new Bebida
+            {
+                Nombre = "Leche",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+
+            var Fast = new Bebida
+            {
+                Nombre = "Fast",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+            var Nada = new Bebida
+            {
+                Nombre = "Nada",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
+            var Yemen = new Bebida
+            {
+                Nombre = "Yemen",
+                Volumen = 19,
+                Sabor = "Cola",
+                Casa = "Cocacola Gt",
+                Precio = 5
+            };
             #region Por Insertar
             //var Aa = new Bebida
             //{
@@ -234,10 +275,20 @@ namespace StarConsola
             metodosArbol.Insertar(Pepper);
             metodosArbol.Insertar(Aqua);
             metodosArbol.Insertar(Ab);
+            //comparte derecha
             metodosArbol.Insertar(Code);
             metodosArbol.Insertar(zhu);
             metodosArbol.Insertar(Glacéau);
             metodosArbol.Insertar(Quetzalteca);
+            metodosArbol.Insertar(H2O);
+            metodosArbol.Insertar(Leche);
+            metodosArbol.Insertar(Fast); 
+            //comparte izquierda
+            metodosArbol.Insertar(Nada);
+            //comparte derecha
+            metodosArbol.Insertar(Nada);
+            metodosArbol.Insertar(Yemen);
+
             // prestar a la derecha
         }
     }
